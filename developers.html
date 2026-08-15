@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vectrid Developers — API, SDKs & CLI</title>
+<meta name="description" content="Build automated image vectorization into your apps. Use Vectrid SDKs, CLI, or HTTP API to convert raster images to SVG at scale.">
+<meta name="keywords" content="vectrid api, image to svg api, vectorization api, svg sdk, vector conversion api, developer tools">
+<meta property="og:title" content="Vectrid Developers — API, SDKs & CLI">
+<meta property="og:description" content="Integrate automated image-to-SVG conversion into your applications, scripts, and production pipelines.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Vectrid Developers — API, SDKs & CLI">
+<meta name="twitter:description" content="Build automated image vectorization into your apps with Vectrid API.">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#f4f4f8;--surface:#ffffff;--surface2:#eeeef2;--surface3:#e0e0e6;
+  --border:#d0d0d8;--border2:#c0c0ca;
+  --text:#1a1a2e;--text2:#555570;--text3:#8888a0;
+  --accent:#6b5ce7;--accent2:#8070ff;--accent-bg:rgba(107,92,231,.08);
+  --success:#059669;--danger:#dc2626;
+  --radius:10px;--radius-sm:6px;
+  --font:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  --mono:'SF Mono','Cascadia Code','Fira Code',Consolas,monospace;
+}
+:root[data-theme="dark"]{
+  --bg:#0b0b0f;--surface:#141418;--surface2:#1e1e24;--surface3:#28282f;
+  --border:#2a2a32;--border2:#3a3a44;
+  --text:#ebebf0;--text2:#8888a0;--text3:#5c5c72;
+  --accent:#7c6cff;--accent2:#9b8eff;--accent-bg:rgba(124,108,255,.08);
+  --success:#34d399;--danger:#f87171;
+}
+body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* ── Topbar ── */
+.topbar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 32px;border-bottom:1px solid var(--border);background:var(--surface);
+  position:sticky;top:0;z-index:100;
+}
+.topbar-left{display:flex;align-items:center;gap:16px}
+.topbar-logo{font-size:20px;font-weight:700;color:var(--text);text-decoration:none}
+.topbar-logo:hover{text-decoration:none}
+.topbar-nav{display:flex;gap:8px}
+.topbar-nav a{
+  padding:6px 14px;border-radius:var(--radius-sm);color:var(--text2);
+  font-size:14px;font-weight:500;transition:all .15s;
+}
+.topbar-nav a:hover,.topbar-nav a.active{
+  background:var(--accent-bg);color:var(--accent);text-decoration:none;
+}
+.topbar-burger{
+  display:none;width:36px;height:36px;border-radius:var(--radius-sm);border:1px solid var(--border);
+  background:var(--surface);cursor:pointer;font-size:20px;align-items:center;justify-content:center;
+  color:var(--text2);
+}
+.topbar-right{display:flex;align-items:center;gap:12px}
+.btn-key{
+  padding:8px 18px;border-radius:var(--radius-sm);border:none;
+  background:var(--accent);color:#fff;font-size:14px;font-weight:600;
+  cursor:pointer;transition:background .15s;
+}
+.btn-key:hover{background:var(--accent2)}
+.btn-theme{
+  width:36px;height:36px;border-radius:50%;border:1px solid var(--border);
+  background:var(--surface);cursor:pointer;font-size:18px;display:flex;
+  align-items:center;justify-content:center;color:var(--text2);
+}
+
+/* ── Hero ── */
+.hero{
+  max-width:1100px;margin:0 auto;padding:80px 32px 60px;
+  display:grid;grid-template-columns:1fr 320px;gap:40px;align-items:start;
+}
+.hero-content{text-align:center}
+.hero h1{font-size:48px;font-weight:800;letter-spacing:-1px;margin-bottom:8px;text-align:center}
+.hero h1 span{color:var(--accent)}
+.hero-divider{
+  width:80px;height:3px;background:var(--accent);margin:20px auto 28px;border-radius:2px;
+}
+.hero p{font-size:18px;color:var(--text2);max-width:680px;margin:0 auto 12px;line-height:1.7}
+.hero p:last-of-type{margin-bottom:40px}
+.hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.hero-btns a{
+  padding:14px 32px;border-radius:var(--radius);font-size:15px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.8px;transition:all .15s;
+  text-decoration:none;
+}
+.hero-btns a.primary{background:var(--accent);color:#fff}
+.hero-btns a.primary:hover{background:var(--accent2)}
+.hero-btns a.secondary{
+  background:var(--surface);color:var(--text);
+  border:1.5px solid var(--border);
+}
+.hero-btns a.secondary:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ── Dev Options Card ── */
+.dev-options{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  padding:24px 28px;margin-top:60px;align-self:start;
+}
+.dev-options h3{font-size:16px;font-weight:600;margin-bottom:16px;color:var(--text)}
+.dev-options ul{list-style:disc;padding-left:20px}
+.dev-options li{margin-bottom:10px;font-size:14px;color:var(--text2)}
+.dev-options li strong{color:var(--text);font-weight:600}
+
+/* ── Section ── */
+.section{max-width:1100px;margin:0 auto;padding:60px 32px}
+.section-title{
+  font-size:36px;font-weight:800;text-align:center;margin-bottom:12px;
+  letter-spacing:-.5px;
+}
+.section-sub{
+  font-size:16px;color:var(--text2);text-align:center;max-width:600px;
+  margin:0 auto 48px;
+}
+
+/* ── Integration Cards ── */
+.int-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:24px;
+}
+.int-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  padding:32px 28px;transition:all .2s;position:relative;overflow:hidden;
+}
+.int-card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 8px 24px rgba(107,92,231,.1)}
+.int-card-icon{
+  width:48px;height:48px;border-radius:var(--radius-sm);
+  background:var(--accent-bg);display:flex;align-items:center;justify-content:center;
+  font-size:24px;margin-bottom:16px;
+}
+.int-card h3{font-size:18px;font-weight:700;margin-bottom:8px}
+.int-card p{font-size:14px;color:var(--text2);line-height:1.6;margin-bottom:16px}
+.int-card-lang{display:flex;gap:6px;flex-wrap:wrap}
+.int-card-lang span{
+  padding:3px 10px;border-radius:12px;font-size:12px;font-weight:600;
+  background:var(--surface2);color:var(--text3);
+}
+
+/* ── Code Examples ── */
+.code-section{background:var(--surface2);padding:60px 32px}
+.code-tabs{
+  display:flex;gap:4px;margin-bottom:0;justify-content:center;flex-wrap:wrap;
+}
+.code-tab{
+  padding:10px 24px;border:none;background:var(--surface3);color:var(--text2);
+  font-size:14px;font-weight:600;cursor:pointer;border-radius:var(--radius-sm) var(--radius-sm) 0 0;
+  transition:all .15s;font-family:var(--font);
+}
+.code-tab.active{background:var(--surface);color:var(--accent)}
+.code-tab:hover:not(.active){color:var(--text)}
+.code-block{
+  max-width:720px;margin:0 auto;background:var(--surface);
+  border:1px solid var(--border);border-radius:0 0 var(--radius) var(--radius);
+  overflow:hidden;
+}
+.code-block pre{
+  padding:24px;overflow-x:auto;font-family:var(--mono);font-size:13px;
+  line-height:1.7;color:var(--text);margin:0;
+}
+.code-block .kw{color:var(--accent)}
+.code-block .str{color:var(--success)}
+.code-block .cmt{color:var(--text3);font-style:italic}
+.code-block .fn{color:#e0a020}
+
+/* ── Features Grid ── */
+.feat-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:20px;
+}
+.feat-item{
+  display:flex;gap:16px;padding:24px;background:var(--surface);
+  border:1px solid var(--border);border-radius:var(--radius);
+}
+.feat-icon{
+  width:40px;height:40px;min-width:40px;border-radius:var(--radius-sm);
+  background:var(--accent-bg);display:flex;align-items:center;justify-content:center;
+  font-size:20px;
+}
+.feat-item h4{font-size:15px;font-weight:700;margin-bottom:4px}
+.feat-item p{font-size:13px;color:var(--text2);line-height:1.5}
+
+/* ── Pricing ── */
+.pricing-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:24px;max-width:960px;margin:0 auto;
+}
+.pricing-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  padding:36px 28px;text-align:center;position:relative;
+}
+.pricing-card.featured{border-color:var(--accent);box-shadow:0 4px 20px rgba(107,92,231,.12)}
+.pricing-card.featured::before{
+  content:'POPULAR';position:absolute;top:-12px;left:50%;transform:translateX(-50%);
+  background:var(--accent);color:#fff;font-size:11px;font-weight:700;
+  padding:4px 16px;border-radius:12px;letter-spacing:1px;
+}
+.pricing-card h3{font-size:22px;font-weight:700;margin-bottom:8px}
+.pricing-price{font-size:40px;font-weight:800;margin:16px 0 4px}
+.pricing-price span{font-size:16px;font-weight:400;color:var(--text2)}
+.pricing-desc{font-size:14px;color:var(--text2);margin-bottom:24px}
+.pricing-features{text-align:left;margin-bottom:28px}
+.pricing-features li{
+  list-style:none;padding:8px 0;border-bottom:1px solid var(--surface2);
+  font-size:14px;color:var(--text2);
+}
+.pricing-features li::before{content:'✓ ';color:var(--success);font-weight:700}
+.pricing-btn{
+  display:block;width:100%;padding:14px;border-radius:var(--radius-sm);border:none;
+  font-size:15px;font-weight:700;cursor:pointer;transition:all .15s;
+}
+.pricing-btn.primary{background:var(--accent);color:#fff}
+.pricing-btn.primary:hover{background:var(--accent2)}
+.pricing-btn.secondary{background:var(--surface2);color:var(--text)}
+.pricing-btn.secondary:hover{background:var(--surface3)}
+
+/* ── CTA ── */
+.cta{
+  text-align:center;padding:80px 32px;
+  background:linear-gradient(135deg,var(--accent-bg),transparent);
+}
+.cta h2{font-size:32px;font-weight:800;margin-bottom:12px}
+.cta p{font-size:16px;color:var(--text2);margin-bottom:32px}
+.cta-input{
+  display:flex;gap:0;max-width:480px;margin:0 auto;
+}
+.cta-input input{
+  flex:1;padding:14px 20px;border:1.5px solid var(--border);
+  border-right:none;border-radius:var(--radius-sm) 0 0 var(--radius-sm);
+  font-size:15px;background:var(--surface);color:var(--text);
+  font-family:var(--font);outline:none;
+}
+.cta-input input:focus{border-color:var(--accent)}
+.cta-input button{
+  padding:14px 28px;border:none;border-radius:0 var(--radius-sm) var(--radius-sm) 0;
+  background:var(--accent);color:#fff;font-size:15px;font-weight:700;
+  cursor:pointer;font-family:var(--font);white-space:nowrap;
+}
+.cta-input button:hover{background:var(--accent2)}
+
+/* ── Footer ── */
+.footer{
+  padding:40px 32px;border-top:1px solid var(--border);text-align:center;
+  font-size:13px;color:var(--text3);
+}
+.footer a{color:var(--text2)}
+
+/* ── Responsive ── */
+@media(max-width:768px){
+  .hero{grid-template-columns:1fr;gap:0}
+  .hero h1{font-size:32px}
+  .hero p{font-size:16px}
+  .hero-btns a{padding:12px 24px;font-size:13px}
+  .dev-options{display:none}
+  .section-title{font-size:28px}
+  .topbar{padding:12px 16px}
+  .topbar-nav{
+    display:none;position:absolute;top:100%;left:0;right:0;
+    flex-direction:column;background:var(--surface);border-bottom:1px solid var(--border);
+    padding:8px 16px;gap:4px;box-shadow:0 4px 12px rgba(0,0,0,.08);
+  }
+  .topbar-nav.open{display:flex}
+  .topbar-nav a{padding:10px 14px}
+  .topbar-burger{display:flex}
+  .code-tab{padding:8px 14px;font-size:12px}
+  .cta-input{flex-direction:column}
+  .cta-input input{border-right:1.5px solid var(--border);border-radius:var(--radius-sm)}
+  .cta-input button{border-radius:var(--radius-sm)}
+}
+</style>
+</head>
+<body>
+
+<!-- ── Topbar ── -->
+<nav class="topbar">
+  <div class="topbar-left">
+    <a href="index.html" class="topbar-logo">Vectrid</a>
+    <button class="topbar-burger" id="btn-burger" aria-label="Menu">&#9776;</button>
+    <div class="topbar-nav" id="topbar-nav">
+      <a href="developers.html" class="active">Developers</a>
+      <a href="#sdks">SDKs</a>
+      <a href="#api-reference">API Docs</a>
+      <a href="#pricing">Pricing</a>
+    </div>
+  </div>
+  <div class="topbar-right">
+    <button class="btn-key" id="btn-get-key">Get API Key</button>
+    <button class="btn-theme" id="btn-theme" aria-label="Toggle dark/light theme">&#9728;</button>
+  </div>
+</nav>
+
+<!-- ── Hero ── -->
+<section class="hero">
+  <div class="hero-content">
+    <h1><span>Vectrid</span> Developers</h1>
+    <div class="hero-divider"></div>
+    <p>Build automated image vectorization into applications, scripts, and production pipelines. Start with the official SDKs for application code, use the CLI for batch jobs and shell workflows, or call the HTTP API directly when you want complete control.</p>
+    <p>All developer tools use the same Vectrid API: authenticated raster-to-vector conversion for PNG, JPG, WebP, GIF, and BMP inputs with SVG, PDF, EPS, and PNG output.</p>
+    <div class="hero-btns">
+      <a href="#sdks" class="primary">Start with SDKs</a>
+      <a href="#cli" class="secondary">Use the CLI</a>
+      <a href="#api-reference" class="secondary">Read API Docs</a>
+    </div>
+  </div>
+
+  <div class="dev-options">
+    <h3>Developer options</h3>
+    <ul>
+      <li><strong>SDKs</strong> for application code in common languages</li>
+      <li><strong>CLI</strong> for terminals, scripts, and batch jobs</li>
+      <li><strong>HTTP API</strong> for custom integrations</li>
+      <li><strong>OpenAPI</strong> for generated clients and API tools</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ── Choose Integration Path ── -->
+<section class="section" id="sdks">
+  <h2 class="section-title">Choose Your Integration Path</h2>
+  <p class="section-sub">Pick the approach that fits your workflow. All paths connect to the same powerful vectorization engine.</p>
+  <div class="int-grid">
+    <div class="int-card">
+      <div class="int-card-icon">{ }</div>
+      <h3>SDKs</h3>
+      <p>Official client libraries with typed interfaces, automatic retries, and built-in error handling. The fastest way to add vectorization to your app.</p>
+      <div class="int-card-lang">
+        <span>Python</span><span>Node.js</span><span>Go</span><span>Ruby</span><span>PHP</span><span>Java</span>
+      </div>
+    </div>
+    <div class="int-card" id="cli">
+      <div class="int-card-icon">&gt;_</div>
+      <h3>CLI</h3>
+      <p>Convert images from your terminal. Pipe into shell scripts, run batch jobs on folders, or integrate into CI/CD pipelines.</p>
+      <div class="int-card-lang">
+        <span>macOS</span><span>Linux</span><span>Windows</span>
+      </div>
+    </div>
+    <div class="int-card" id="api-reference">
+      <div class="int-card-icon">/&thinsp;/</div>
+      <h3>HTTP API</h3>
+      <p>RESTful endpoints with multipart upload. Full control over parameters, output formats, and processing options. OpenAPI 3.0 spec available.</p>
+      <div class="int-card-lang">
+        <span>REST</span><span>JSON</span><span>OpenAPI</span>
+      </div>
+    </div>
+    <div class="int-card">
+      <div class="int-card-icon">&lt;/&gt;</div>
+      <h3>Webhooks</h3>
+      <p>Asynchronous processing for large batches. Submit jobs and receive results via webhook callback when conversion completes.</p>
+      <div class="int-card-lang">
+        <span>Async</span><span>Batch</span><span>Callbacks</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Code Examples ── -->
+<section class="code-section">
+  <div class="section" style="padding-top:0;padding-bottom:0">
+    <h2 class="section-title">Quick Start</h2>
+    <p class="section-sub">Get vectorizing in under 5 lines of code.</p>
+    <div class="code-tabs">
+      <button class="code-tab active" data-lang="python">Python</button>
+      <button class="code-tab" data-lang="node">Node.js</button>
+      <button class="code-tab" data-lang="curl">cURL</button>
+      <button class="code-tab" data-lang="go">Go</button>
+      <button class="code-tab" data-lang="cli">CLI</button>
+    </div>
+    <div class="code-block">
+      <pre id="code-display"><span class="cmt"># Install: pip install vectrid</span>
+<span class="kw">import</span> vectrid
+
+client = vectrid.<span class="fn">Client</span>(<span class="str">"your_api_key"</span>)
+
+<span class="cmt"># Convert an image to SVG</span>
+result = client.<span class="fn">vectorize</span>(<span class="str">"photo.png"</span>)
+result.<span class="fn">save</span>(<span class="str">"output.svg"</span>)
+
+<span class="cmt"># With options</span>
+result = client.<span class="fn">vectorize</span>(
+    <span class="str">"logo.jpg"</span>,
+    mode=<span class="str">"spline"</span>,
+    colors=16,
+    output_format=<span class="str">"svg"</span>
+)</pre>
+    </div>
+  </div>
+</section>
+
+<!-- ── API Features ── -->
+<section class="section">
+  <h2 class="section-title">Built for Production</h2>
+  <p class="section-sub">Enterprise-grade API with the reliability your pipeline demands.</p>
+  <div class="feat-grid">
+    <div class="feat-item">
+      <div class="feat-icon">&#9889;</div>
+      <div>
+        <h4>Fast Processing</h4>
+        <p>Average response time under 2 seconds for standard images. Optimized WASM engine for consistent performance.</p>
+      </div>
+    </div>
+    <div class="feat-item">
+      <div class="feat-icon">&#128274;</div>
+      <div>
+        <h4>Secure by Default</h4>
+        <p>TLS encryption, API key authentication, and automatic image deletion after processing. SOC 2 compliant.</p>
+      </div>
+    </div>
+    <div class="feat-item">
+      <div class="feat-icon">&#128200;</div>
+      <div>
+        <h4>Auto-Scaling</h4>
+        <p>Handles burst traffic automatically. From 1 to 10,000 requests per minute with zero configuration.</p>
+      </div>
+    </div>
+    <div class="feat-item">
+      <div class="feat-icon">&#127760;</div>
+      <div>
+        <h4>Global Edge Network</h4>
+        <p>Deployed across multiple regions. Low latency whether your users are in New York, London, or Tokyo.</p>
+      </div>
+    </div>
+    <div class="feat-item">
+      <div class="feat-icon">&#128196;</div>
+      <div>
+        <h4>Multiple Output Formats</h4>
+        <p>SVG, PDF, EPS, and upscaled PNG. DXF available on Enterprise plans. Choose the format that fits your workflow.</p>
+      </div>
+    </div>
+    <div class="feat-item">
+      <div class="feat-icon">&#128736;</div>
+      <div>
+        <h4>Fine-Grained Control</h4>
+        <p>20+ parameters for color count, path simplification, corner threshold, speckle filter, and more.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Pricing ── -->
+<section class="section" id="pricing" style="background:var(--surface2);margin:0;max-width:100%;padding:60px 32px">
+  <h2 class="section-title">Simple, Transparent Pricing</h2>
+  <p class="section-sub">Start free. Scale as you grow. No hidden fees.</p>
+  <div class="pricing-grid">
+    <div class="pricing-card">
+      <h3>Free</h3>
+      <div class="pricing-price">$0<span>/mo</span></div>
+      <div class="pricing-desc">For testing and personal projects</div>
+      <ul class="pricing-features">
+        <li>100 conversions / month</li>
+        <li>Max 5 MB per image</li>
+        <li>SVG output only</li>
+        <li>Community support</li>
+        <li>Standard processing speed</li>
+      </ul>
+      <button class="pricing-btn secondary">Get Free Key</button>
+    </div>
+    <div class="pricing-card featured">
+      <h3>Pro</h3>
+      <div class="pricing-price">$29<span>/mo</span></div>
+      <div class="pricing-desc">For apps and growing businesses</div>
+      <ul class="pricing-features">
+        <li>5,000 conversions / month</li>
+        <li>Max 25 MB per image</li>
+        <li>SVG, PDF, EPS, PNG output</li>
+        <li>Priority support</li>
+        <li>Webhook callbacks</li>
+        <li>Batch processing</li>
+      </ul>
+      <button class="pricing-btn primary">Start Pro Trial</button>
+    </div>
+    <div class="pricing-card">
+      <h3>Enterprise</h3>
+      <div class="pricing-price">Custom</div>
+      <div class="pricing-desc">For high-volume and custom needs</div>
+      <ul class="pricing-features">
+        <li>Unlimited conversions</li>
+        <li>No file size limit</li>
+        <li>All output formats + DXF</li>
+        <li>Dedicated support + SLA</li>
+        <li>Custom deployment options</li>
+        <li>Volume discounts</li>
+      </ul>
+      <button class="pricing-btn secondary">Contact Sales</button>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section class="cta">
+  <h2>Ready to Start Building?</h2>
+  <p>Get your free API key and start converting images to vectors in minutes.</p>
+  <div class="cta-input">
+    <input type="email" placeholder="Enter your email address" id="cta-email">
+    <button id="cta-submit">Get API Key</button>
+  </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer class="footer">
+  <p>&copy; 2026 Vectrid. All rights reserved. &nbsp;|&nbsp; <a href="#">Privacy Policy</a> &nbsp;|&nbsp; <a href="#">Terms of Service</a> &nbsp;|&nbsp; <a href="#">Status</a></p>
+</footer>
+
+<script>
+var themeBtn = document.getElementById('btn-theme');
+var savedTheme = localStorage.getItem('vectrid-theme') || 'light';
+if(savedTheme === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+updateThemeIcon();
+
+function updateThemeIcon(){
+  var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  themeBtn.innerHTML = isDark ? '&#9790;' : '&#9728;';
+}
+
+themeBtn.addEventListener('click', function(){
+  var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  if(isDark){
+    document.documentElement.removeAttribute('data-theme');
+    localStorage.setItem('vectrid-theme', 'light');
+  } else {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    localStorage.setItem('vectrid-theme', 'dark');
+  }
+  updateThemeIcon();
+});
+
+// Burger menu
+var burger = document.getElementById('btn-burger');
+var navMenu = document.getElementById('topbar-nav');
+burger.addEventListener('click', function(){
+  navMenu.classList.toggle('open');
+});
+navMenu.addEventListener('click', function(e){
+  if(e.target.tagName === 'A') navMenu.classList.remove('open');
+});
+
+// Code tabs
+var codeExamples = {
+  python: '<span class="cmt"># Install: pip install vectrid</span>\n<span class="kw">import</span> vectrid\n\nclient = vectrid.<span class="fn">Client</span>(<span class="str">"your_api_key"</span>)\n\n<span class="cmt"># Convert an image to SVG</span>\nresult = client.<span class="fn">vectorize</span>(<span class="str">"photo.png"</span>)\nresult.<span class="fn">save</span>(<span class="str">"output.svg"</span>)\n\n<span class="cmt"># With options</span>\nresult = client.<span class="fn">vectorize</span>(\n    <span class="str">"logo.jpg"</span>,\n    mode=<span class="str">"spline"</span>,\n    colors=16,\n    output_format=<span class="str">"svg"</span>\n)',
+  node: '<span class="cmt">// Install: npm install vectrid</span>\n<span class="kw">const</span> Vectrid = <span class="fn">require</span>(<span class="str">\'vectrid\'</span>);\n\n<span class="kw">const</span> client = <span class="kw">new</span> Vectrid(<span class="str">\'your_api_key\'</span>);\n\n<span class="cmt">// Convert an image to SVG</span>\n<span class="kw">const</span> result = <span class="kw">await</span> client.<span class="fn">vectorize</span>(<span class="str">\'photo.png\'</span>);\n<span class="kw">await</span> result.<span class="fn">save</span>(<span class="str">\'output.svg\'</span>);\n\n<span class="cmt">// With options</span>\n<span class="kw">const</span> result2 = <span class="kw">await</span> client.<span class="fn">vectorize</span>(<span class="str">\'logo.jpg\'</span>, {\n    mode: <span class="str">\'spline\'</span>,\n    colors: 16,\n    outputFormat: <span class="str">\'svg\'</span>\n});',
+  curl: '<span class="cmt"># Simple conversion</span>\ncurl -X POST https://api.vectrid.com/v1/vectorize \\\n  -H <span class="str">"Authorization: Bearer your_api_key"</span> \\\n  -F <span class="str">"image=@photo.png"</span> \\\n  -o output.svg\n\n<span class="cmt"># With parameters</span>\ncurl -X POST https://api.vectrid.com/v1/vectorize \\\n  -H <span class="str">"Authorization: Bearer your_api_key"</span> \\\n  -F <span class="str">"image=@logo.jpg"</span> \\\n  -F <span class="str">"mode=spline"</span> \\\n  -F <span class="str">"colors=16"</span> \\\n  -F <span class="str">"format=svg"</span> \\\n  -o output.svg',
+  go: '<span class="cmt">// Install: go get github.com/vectrid/vectrid-go</span>\n<span class="kw">package</span> main\n\n<span class="kw">import</span> <span class="str">"github.com/vectrid/vectrid-go"</span>\n\n<span class="kw">func</span> <span class="fn">main</span>() {\n    client := vectrid.<span class="fn">NewClient</span>(<span class="str">"your_api_key"</span>)\n\n    <span class="cmt">// Convert an image to SVG</span>\n    result, _ := client.<span class="fn">Vectorize</span>(<span class="str">"photo.png"</span>, <span class="kw">nil</span>)\n    result.<span class="fn">Save</span>(<span class="str">"output.svg"</span>)\n\n    <span class="cmt">// With options</span>\n    opts := &vectrid.Options{\n        Mode:   <span class="str">"spline"</span>,\n        Colors: 16,\n    }\n    result, _ = client.<span class="fn">Vectorize</span>(<span class="str">"logo.jpg"</span>, opts)\n}',
+  cli: '<span class="cmt"># Install</span>\nnpm install -g vectrid-cli\n\n<span class="cmt"># Authenticate</span>\nvectrid auth <span class="str">your_api_key</span>\n\n<span class="cmt"># Convert a single image</span>\nvectrid convert photo.png -o output.svg\n\n<span class="cmt"># Batch convert a folder</span>\nvectrid convert ./images/ -o ./vectors/ --format svg\n\n<span class="cmt"># With options</span>\nvectrid convert logo.jpg -o logo.svg \\\n  --mode spline --colors 16 --filter-speckle 4'
+};
+
+document.querySelectorAll('.code-tab').forEach(function(tab){
+  tab.addEventListener('click', function(){
+    document.querySelectorAll('.code-tab').forEach(function(t){ t.classList.remove('active') });
+    tab.classList.add('active');
+    document.getElementById('code-display').innerHTML = codeExamples[tab.dataset.lang];
+  });
+});
+
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(function(a){
+  a.addEventListener('click', function(e){
+    var target = document.querySelector(a.getAttribute('href'));
+    if(target){
+      e.preventDefault();
+      target.scrollIntoView({behavior:'smooth',block:'start'});
+    }
+  });
+});
+</script>
+
+</body>
+</html>

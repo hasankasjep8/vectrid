@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terms of Service — Vectrid</title>
+<meta name="description" content="Vectrid Terms of Service. Read the terms governing your use of Vectrid's image vectorization tools and API.">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#f4f4f8;--surface:#ffffff;--surface2:#eeeef2;--surface3:#e0e0e6;
+  --border:#d0d0d8;--border2:#c0c0ca;
+  --text:#1a1a2e;--text2:#555570;--text3:#8888a0;
+  --accent:#6b5ce7;--accent2:#8070ff;--accent-bg:rgba(107,92,231,.08);
+  --radius:10px;--radius-sm:6px;
+  --font:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+}
+:root[data-theme="dark"]{
+  --bg:#0b0b0f;--surface:#141418;--surface2:#1e1e24;--surface3:#28282f;
+  --border:#2a2a32;--border2:#3a3a44;
+  --text:#ebebf0;--text2:#8888a0;--text3:#5c5c72;
+  --accent:#7c6cff;--accent2:#9585ff;--accent-bg:rgba(124,108,255,.1);
+}
+body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.7}
+.topbar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 32px;border-bottom:1px solid var(--border);background:var(--surface);
+  position:sticky;top:0;z-index:50;
+}
+.topbar-brand{font-size:20px;font-weight:800;color:var(--text);text-decoration:none}
+.topbar-brand span{color:var(--accent)}
+.topbar-nav{display:flex;align-items:center;gap:12px}
+.topbar-nav a{font-size:13px;color:var(--text2);text-decoration:none;padding:6px 12px;border-radius:var(--radius-sm)}
+.topbar-nav a:hover{color:var(--accent)}
+.theme-btn{background:none;border:1px solid var(--border);border-radius:var(--radius-sm);
+  padding:6px 10px;cursor:pointer;font-size:16px;color:var(--text2)}
+.container{max-width:800px;margin:0 auto;padding:60px 32px 80px}
+h1{font-size:36px;font-weight:800;margin-bottom:8px}
+.subtitle{color:var(--text3);font-size:14px;margin-bottom:48px}
+h2{font-size:20px;font-weight:700;margin:40px 0 12px;color:var(--text)}
+p{color:var(--text2);margin-bottom:16px;font-size:15px}
+ul{color:var(--text2);margin:0 0 16px 24px;font-size:15px}
+ul li{margin-bottom:6px}
+.highlight-box{
+  background:var(--accent-bg);border-left:3px solid var(--accent);
+  padding:16px 20px;border-radius:0 var(--radius-sm) var(--radius-sm) 0;
+  margin:24px 0;font-size:14px;color:var(--text)
+}
+.footer{
+  padding:40px 32px;border-top:1px solid var(--border);text-align:center;
+  font-size:13px;color:var(--text3);
+}
+.footer a{color:var(--text2);text-decoration:none}
+.footer a:hover{color:var(--accent)}
+@media(max-width:600px){
+  .topbar{padding:12px 16px}
+  .container{padding:40px 16px 60px}
+  h1{font-size:28px}
+}
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <a href="index.html" class="topbar-brand"><span>Vectrid</span></a>
+  <div class="topbar-nav">
+    <a href="index.html">App</a>
+    <a href="developers.html">Developers</a>
+    <button class="theme-btn" id="theme-toggle" aria-label="Toggle theme">&#9728;</button>
+  </div>
+</nav>
+
+<div class="container">
+  <h1>Terms of Service</h1>
+  <p class="subtitle">Last updated: August 15, 2026</p>
+
+  <div class="highlight-box">
+    By using Vectrid, you agree to these Terms. If you do not agree, please do not use the service.
+  </div>
+
+  <h2>1. Acceptance of Terms</h2>
+  <p>These Terms of Service ("Terms") govern your access to and use of Vectrid's website, web application, and Developer API (collectively, the "Service"). By accessing or using the Service, you agree to be bound by these Terms.</p>
+
+  <h2>2. Description of Service</h2>
+  <p>Vectrid provides:</p>
+  <ul>
+    <li><strong>Web Application:</strong> A free, client-side image-to-SVG vectorization tool that runs entirely in your browser.</li>
+    <li><strong>Developer API:</strong> A cloud-based API for programmatic image vectorization, available in Free, Pro, and Enterprise tiers.</li>
+  </ul>
+
+  <h2>3. User Responsibilities</h2>
+  <p>You agree to:</p>
+  <ul>
+    <li>Use the Service only for lawful purposes</li>
+    <li>Not upload or process images that you do not have the right to use</li>
+    <li>Not attempt to reverse-engineer, decompile, or disassemble the Service</li>
+    <li>Not interfere with or disrupt the Service or its infrastructure</li>
+    <li>Not use automated tools to scrape or abuse the Service beyond authorized API usage</li>
+    <li>Keep your API credentials confidential and not share them with unauthorized parties</li>
+  </ul>
+
+  <h2>4. Intellectual Property</h2>
+  <p><strong>Your content:</strong> You retain all rights to images you process through Vectrid. We claim no ownership over your input images or output files.</p>
+  <p><strong>Our content:</strong> The Vectrid name, logo, website design, and underlying technology are owned by Vectrid. You may not use our branding without prior written permission.</p>
+
+  <h2>5. API Terms</h2>
+  <p>If you use the Vectrid Developer API:</p>
+  <ul>
+    <li><strong>Rate limits:</strong> Each plan has defined rate limits. Exceeding them may result in throttling or temporary suspension.</li>
+    <li><strong>API keys:</strong> You are responsible for all activity under your API key. Notify us immediately if you suspect unauthorized use.</li>
+    <li><strong>Fair use:</strong> Free tier usage is subject to fair use limits. We reserve the right to restrict accounts that abuse the free tier.</li>
+  </ul>
+
+  <h2>6. Payment & Billing</h2>
+  <p>For paid plans (Pro and Enterprise):</p>
+  <ul>
+    <li>Billing is monthly, charged at the start of each billing period</li>
+    <li>Payments are processed securely through Stripe</li>
+    <li>You may cancel at any time; access continues until the end of the billing period</li>
+    <li>Refunds are available within 14 days of initial purchase if you are unsatisfied</li>
+    <li>We reserve the right to change pricing with 30 days' notice</li>
+  </ul>
+
+  <h2>7. Service Availability</h2>
+  <p>We strive to maintain high availability but do not guarantee uninterrupted service. The web application works offline once loaded. The API may experience planned or unplanned downtime. Check our <a href="status.html" style="color:var(--accent)">Status page</a> for current service status.</p>
+
+  <h2>8. Limitation of Liability</h2>
+  <p>Vectrid is provided "as is" without warranties of any kind, express or implied. To the maximum extent permitted by law:</p>
+  <ul>
+    <li>We are not liable for any indirect, incidental, or consequential damages</li>
+    <li>Our total liability shall not exceed the amount you paid us in the 12 months preceding the claim</li>
+    <li>We are not responsible for the quality or accuracy of vectorization output</li>
+  </ul>
+
+  <h2>9. Termination</h2>
+  <p>We may suspend or terminate your access to the Service at any time for violation of these Terms. You may stop using the Service at any time. Upon termination, your right to use the API ceases immediately.</p>
+
+  <h2>10. Changes to Terms</h2>
+  <p>We may modify these Terms at any time. Material changes will be communicated via the website or email (for API users). Continued use of the Service after changes constitutes acceptance.</p>
+
+  <h2>11. Governing Law</h2>
+  <p>These Terms are governed by the laws of the Republic of Indonesia. Any disputes shall be resolved in the courts of Jakarta, Indonesia.</p>
+
+  <h2>12. Contact</h2>
+  <p>Questions about these Terms? Contact us at <strong>legal@vectrid.com</strong>.</p>
+</div>
+
+<footer class="footer">
+  <p>&copy; 2026 Vectrid. All rights reserved. &nbsp;|&nbsp; <a href="privacy.html">Privacy Policy</a> &nbsp;|&nbsp; <a href="terms.html">Terms of Service</a> &nbsp;|&nbsp; <a href="status.html">Status</a></p>
+</footer>
+
+<script>
+var themeBtn = document.getElementById('theme-toggle');
+var saved = localStorage.getItem('vectrid-theme') || 'light';
+if(saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+function updateIcon(){
+  themeBtn.innerHTML = document.documentElement.getAttribute('data-theme') === 'dark' ? '&#9790;' : '&#9728;';
+}
+updateIcon();
+themeBtn.addEventListener('click', function(){
+  var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  if(isDark){ document.documentElement.removeAttribute('data-theme'); localStorage.setItem('vectrid-theme','light'); }
+  else { document.documentElement.setAttribute('data-theme','dark'); localStorage.setItem('vectrid-theme','dark'); }
+  updateIcon();
+});
+</script>
+</body>
+</html>
